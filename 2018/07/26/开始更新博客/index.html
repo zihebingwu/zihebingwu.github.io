@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>开始更新博客 | zihebingwu&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端菜鸟">
+  <meta name="description" content="先来说下LUN LUN的概念之前一见到这个单词就蒙圈，这是源于总想着它是啥，指的是什么。先来看下它的概念。LUN:全称是logical unit number,即逻辑单元号。由于SCSI总线上连接设备最多有15个，用Target ID来描述这些设备，一个号对应一个设备。然而，实际中需要描述的设备是远远超过这些数字的，于是就有了lun,每个target下都可以有多个lun device，我们通常简称">
 <meta property="og:type" content="article">
 <meta property="og:title" content="开始更新博客">
 <meta property="og:url" content="http://yoursite.com/2018/07/26/开始更新博客/index.html">
 <meta property="og:site_name" content="zihebingwu&#39;s Blog">
-<meta property="og:description" content="前端菜鸟">
+<meta property="og:description" content="先来说下LUN LUN的概念之前一见到这个单词就蒙圈，这是源于总想着它是啥，指的是什么。先来看下它的概念。LUN:全称是logical unit number,即逻辑单元号。由于SCSI总线上连接设备最多有15个，用Target ID来描述这些设备，一个号对应一个设备。然而，实际中需要描述的设备是远远超过这些数字的，于是就有了lun,每个target下都可以有多个lun device，我们通常简称">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-26T07:07:46.627Z">
+<meta property="og:updated_time" content="2018-07-30T08:55:46.522Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开始更新博客">
-<meta name="twitter:description" content="前端菜鸟">
+<meta name="twitter:description" content="先来说下LUN LUN的概念之前一见到这个单词就蒙圈，这是源于总想着它是啥，指的是什么。先来看下它的概念。LUN:全称是logical unit number,即逻辑单元号。由于SCSI总线上连接设备最多有15个，用Target ID来描述这些设备，一个号对应一个设备。然而，实际中需要描述的设备是远远超过这些数字的，于是就有了lun,每个target下都可以有多个lun device，我们通常简称">
   
     <link rel="alternative" href="/atom.xml" title="zihebingwu&#39;s Blog" type="application/atom+xml">
   
@@ -178,7 +178,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="先来说下LUN"><a href="#先来说下LUN" class="headerlink" title="先来说下LUN"></a>先来说下<strong>LUN</strong></h1><ol>
+<li><strong>LUN的概念</strong><br>之前一见到这个单词就蒙圈，这是源于总想着它是啥，指的是什么。先来看下它的概念。<br><strong>LUN:</strong>全称是logical unit number,即逻辑单元号。由于SCSI总线上连接设备最多有15个，用Target ID来描述这些设备，一个号对应一个设备。然而，实际中需要描述的设备是远远超过这些数字的，于是就有了<strong>lun</strong>,每个target下都可以有多个lun device，我们通常简称lun device为lun，这样就可以说每个设备的描述就有原来的target x变成target x lun y了,那么显而易见的,我们描述设备的能力增强了。（可以理解成原来只有一级分支的树形图，现在又多了二级分支）。  </li>
+<li><strong>LUN masking</strong><br>为了保证并不是所有的磁盘资源都能够被主机所使用，就要采取管制措施，是的主机只能使用某一部分资源。 lun masking保证服务器只能访问给它分配的存储资源，没给它分配的资源，就不要想了。通过LUN映射表对特定的主机报告特定的LUN.</li>
+<li><strong>LUN mapping</strong><br>lun mapping是一样的道理，类似于绿色通道，保证服务器只能看到某部分资源。</li>
+<li><p><strong>LUN 的 multi-path</strong><br>现在，存储网络越来越发达了，一个lun有多条通路可以访问也不是新鲜事了。  </p>
+<p>服务器使用多个HBA连接到存储网络，存储网络又可能是由多个交换设备组成，而存储系统又可能有多个控制器和链路，lun到服务器的存储网络链路又可能存在着多条不同的逻辑链路。那么，必然的，同一个physical lun在服务器上必然被识别为多个设备。因为os区别设备无非用的是总线，target id，lun id来，只要号码不同，就认为是不同的设备。   </p>
+<p>由于上面的情况，多路径管理软件应运而生了，比如emc的powerpath，这个软件的作用就是让操作系统知道那些操作系统识别到lun实际上是一个真正的physical lun，具体的做法，就是生成一个特别的设备文件，操作系统操作这个特殊的设备文件。而我们知道，设备文件+driver+firmware的一个作用，就是告诉操作系统该怎么使用这个设备。那么就是说，多路径管理软件从driver和设备文件着手，告诉了操作系统怎么来处理这些身份复杂的lun。 </p>
+</li>
+</ol>
+
       
 
       
