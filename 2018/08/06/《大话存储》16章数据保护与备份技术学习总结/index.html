@@ -115,7 +115,7 @@
 <meta property="og:site_name" content="zihebingwu&#39;s Blog">
 <meta property="og:description" content="数据保护，就是对当前位置的数据进行备份，以防止突发情况的发生造成数据的丢失带来的损失。   数据保护文件级备份文件级的备份是通过调用文件系统的接口将数据一文件的形式读出，然后将读出的文件存到另一个介质上，由于原来的介质上有文件系统管理数据，文件的存放可以不连续，而在新介质上很可能是连续的。    块级备份这里的“块”，相对于磁盘来说就是扇区(Sector)，块级备份不考虑文件系统的逻辑，直接通过磁">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-06T09:33:36.572Z">
+<meta property="og:updated_time" content="2018-08-06T09:52:27.860Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《大话存储》16章数据保护与备份技术学习总结">
 <meta name="twitter:description" content="数据保护，就是对当前位置的数据进行备份，以防止突发情况的发生造成数据的丢失带来的损失。   数据保护文件级备份文件级的备份是通过调用文件系统的接口将数据一文件的形式读出，然后将读出的文件存到另一个介质上，由于原来的介质上有文件系统管理数据，文件的存放可以不连续，而在新介质上很可能是连续的。    块级备份这里的“块”，相对于磁盘来说就是扇区(Sector)，块级备份不考虑文件系统的逻辑，直接通过磁">
@@ -326,7 +326,7 @@
                 
               
 
-              <time title="Post created: 2018-08-06 11:08:10 / Updated at: 17:33:36" itemprop="dateCreated datePublished" datetime="2018-08-06T11:08:10+08:00">2018-08-06</time>
+              <time title="Post created: 2018-08-06 11:08:10 / Updated at: 17:52:27" itemprop="dateCreated datePublished" datetime="2018-08-06T11:08:10+08:00">2018-08-06</time>
             
 
             
@@ -365,16 +365,16 @@
 
       
         <p>数据保护，就是对当前位置的数据进行备份，以防止突发情况的发生造成数据的丢失带来的损失。  </p>
-<h1 id="数据保护"><a href="#数据保护" class="headerlink" title="数据保护"></a>数据保护</h1><h3 id="文件级备份"><a href="#文件级备份" class="headerlink" title="文件级备份"></a>文件级备份</h3><p>文件级的备份是通过调用<strong>文件系统的接口</strong>将<strong>数据</strong>一<strong>文件</strong>的形式读出，然后将读出的文件存到另一个介质上，由于原来的介质上有文件系统管理数据，文件的存放可以不连续，而在新介质上很可能是<strong>连续的</strong>。   </p>
-<h3 id="块级备份"><a href="#块级备份" class="headerlink" title="块级备份"></a>块级备份</h3><p>这里的“块”，相对于磁盘来说就是<strong>扇区(Sector)</strong>，块级备份不考虑文件系统的逻辑，直接通过磁盘控制器驱动接口对磁盘扇区进行读取，并将读取到的扇区写入到新的磁盘对应的扇区。  所以<strong>速度快</strong> ，  </p>
+<h1 id="数据保护"><a href="#数据保护" class="headerlink" title="数据保护"></a>数据保护</h1><h4 id="文件级备份"><a href="#文件级备份" class="headerlink" title="文件级备份"></a>文件级备份</h4><p>文件级的备份是通过调用<strong>文件系统的接口</strong>将<strong>数据</strong>一<strong>文件</strong>的形式读出，然后将读出的文件存到另一个介质上，由于原来的介质上有文件系统管理数据，文件的存放可以不连续，而在新介质上很可能是<strong>连续的</strong>。   </p>
+<h4 id="块级备份"><a href="#块级备份" class="headerlink" title="块级备份"></a>块级备份</h4><p>这里的“块”，相对于磁盘来说就是<strong>扇区(Sector)</strong>，块级备份不考虑文件系统的逻辑，直接通过磁盘控制器驱动接口对磁盘扇区进行读取，并将读取到的扇区写入到新的磁盘对应的扇区。  所以<strong>速度快</strong> ，  </p>
 <p>缺点：其一、因为它不管你扇区上有没有数据，都会备份，所以就会备份很多僵尸扇区，我的理解就是无用功，浪费时间资源；其二 ，原来不连续的文件，备份之后还是不连续。</p>
 <p>典型应用就是<strong>磁盘镜像</strong>，而磁盘镜像最简单的实现方式就是RAID1，这里一定要理解<strong>“镜”</strong>这个字，假想你站在镜子前，肯定是你做什么动作，镜子里就会出现什么动作。RAID1将对一块磁盘的写入，完全复制到另一块磁盘，两块磁盘内容完全相同。 </p>
 <a id="more"></a>
-<h1 id="高级数据保护"><a href="#高级数据保护" class="headerlink" title="高级数据保护"></a>高级数据保护</h1><h3 id="远程文件复制"><a href="#远程文件复制" class="headerlink" title="远程文件复制"></a>远程文件复制</h3><p>即把需要备份的文件，通过网络传输到<strong>异地容灾站点</strong>。它可以只复制一个文件中变化过的内容，而不必整个文件都复制：<strong>增量复制</strong>  </p>
-<h3 id="远程磁盘（卷）镜像"><a href="#远程磁盘（卷）镜像" class="headerlink" title="远程磁盘（卷）镜像"></a>远程磁盘（卷）镜像</h3><p>基于块的远程备份，与远程文件复制不同的地方在于，是把块数据备份到异地站点。又可以分为同步和异步复制：  </p>
+<h1 id="高级数据保护"><a href="#高级数据保护" class="headerlink" title="高级数据保护"></a>高级数据保护</h1><h4 id="远程文件复制"><a href="#远程文件复制" class="headerlink" title="远程文件复制"></a>远程文件复制</h4><p>即把需要备份的文件，通过网络传输到<strong>异地容灾站点</strong>。它可以只复制一个文件中变化过的内容，而不必整个文件都复制：<strong>增量复制</strong>  </p>
+<h4 id="远程磁盘（卷）镜像"><a href="#远程磁盘（卷）镜像" class="headerlink" title="远程磁盘（卷）镜像"></a>远程磁盘（卷）镜像</h4><p>基于块的远程备份，与远程文件复制不同的地方在于，是把块数据备份到异地站点。又可以分为同步和异步复制：  </p>
 <p>同步复制：即数据真的复制到异地站点以后，才会上报上层IO成功消息<br>异步复制：写入成功即可回复成功，然后通过网络传输到异地。当然你这个响应快，但不能保证一致性。   </p>
 <h1 id="快-块-照数据保护"><a href="#快-块-照数据保护" class="headerlink" title="快(块)照数据保护"></a>快(块)照数据保护</h1><p>无论远程镜像还是本地镜像，如果某个时刻相对镜像卷进行备份，此时要停掉主机所有的IO动作，即<strong>拆分镜像</strong>，这当然会影响应用。所以—<strong>快照</strong>就产生了。   </p>
-<h3 id="基于文件系统的快照"><a href="#基于文件系统的快照" class="headerlink" title="基于文件系统的快照"></a>基于文件系统的快照</h3><p>文件系统管理的精髓就在于它的链表、B树以及位图等结构。也就是元数据(Metadata) 。  </p>
+<h4 id="基于文件系统的快照"><a href="#基于文件系统的快照" class="headerlink" title="基于文件系统的快照"></a>基于文件系统的快照</h4><p>文件系统管理的精髓就在于它的链表、B树以及位图等结构。也就是元数据(Metadata) 。  </p>
 <ol>
 <li>文件系统将多个扇区组成一个<strong>簇</strong> 来降低管理规模，比如NTFS最大块可以为4KB，也就是8个扇区组成一簇(Block).  </li>
 <li>文件系统会创建所有簇的<strong>位图</strong>文件，每个位对应一个簇，用0、1表示簇是否被使用。被使用了就被置为1.  </li>
@@ -400,7 +400,7 @@
 <li><strong>Copy on First Write (CoFW)</strong><br>快照中的指针始终指向原数据，更改后的数据霸占了原来数据的位置(很霸道呢~)，把原来的数据挤出去了。<strong>一次读出，两次写操作</strong>。系统中将有两套元数据链，原来的元数据指向当前最新的，快照的元数据链指向历史。</li>
 <li><strong>Redirect on First Write,(RoFW)</strong><br>快照中的指针仍指向原数据，这个就比较友好了，给更改的数据另开辟一段新的空间来存放。<strong>一次读出，一次写操作</strong>。系统也有两套元数据，一套是快照保存下来的，永远不更新，一套是源文件系统的，不断的更新。只有<strong>首次覆盖的时候，才重定向</strong>，因为重定向以后的数据块，哪怕被覆盖了，也不影响之前快照保存的数据了。</li>
 </ol>
-<h3 id="基于物理卷的快照"><a href="#基于物理卷的快照" class="headerlink" title="基于物理卷的快照"></a>基于物理卷的快照</h3><p>基于物理卷的快照比文件系统快照要简单的多。因为LUN一般在底层磁盘上是固定的，不像文件系统一样可以随机细粒度的分布。所以可以认为<strong>LUN的原数据就是磁层磁盘的起始和结束地址</strong>。这个就简单了，你不用根据一个额外的文件去找相应的存储地址了，所以在做快照的时候，需要复制的元数据也少了。  </p>
+<h4 id="基于物理卷的快照"><a href="#基于物理卷的快照" class="headerlink" title="基于物理卷的快照"></a>基于物理卷的快照</h4><p>基于物理卷的快照比文件系统快照要简单的多。因为LUN一般在底层磁盘上是固定的，不像文件系统一样可以随机细粒度的分布。所以可以认为<strong>LUN的原数据就是磁层磁盘的起始和结束地址</strong>。这个就简单了，你不用根据一个额外的文件去找相应的存储地址了，所以在做快照的时候，需要复制的元数据也少了。  </p>
 <p>卷扇区方都是用LBA来编号的，实现快照的时候，程序首先保留一张初始LBA表，每当有新的写入请求的时候，重定向到另一个地方，并在初始的LBA表中做好记录。比如</p>
 <pre><code>原始LBA：卷A的10000号，映射到LBA：卷B的100号。  
 </code></pre><p>此时如果来了新的写IO，有两种方式一种是Write Redirect 一种是Copy on Write</p>
@@ -416,9 +416,9 @@
 <li>备份执行引擎：<strong>备份软件</strong></li>
 <li>备份策略</li>
 </ol>
-<h1 id="数据备份"><a href="#数据备份" class="headerlink" title="数据备份"></a>数据备份</h1><h3 id="完全备份"><a href="#完全备份" class="headerlink" title="完全备份"></a>完全备份</h3><p>从字面上就以理解，无论你要备份的数据有多大，我都给你完完全全备份下来，这个应该安全系数比较高，当然你也得考虑实际啊，你需要的空间也大啊。</p>
-<h3 id="差量备份"><a href="#差量备份" class="headerlink" title="差量备份"></a>差量备份</h3><p>只备份从<strong>上次完全备份</strong>以来发生<strong>变化</strong>的数据，是<strong>建立在完全备份的基础</strong>上。</p>
-<h3 id="增量全备份"><a href="#增量全备份" class="headerlink" title="增量全备份"></a>增量全备份</h3><p>只备份从<strong>上次备份</strong>以来文件中发生变化过的数据。不管你上次备份采用的是全备，差备还是增量备份。  </p>
+<h1 id="数据备份"><a href="#数据备份" class="headerlink" title="数据备份"></a>数据备份</h1><h4 id="完全备份"><a href="#完全备份" class="headerlink" title="完全备份"></a>完全备份</h4><p>从字面上就以理解，无论你要备份的数据有多大，我都给你完完全全备份下来，这个应该安全系数比较高，当然你也得考虑实际啊，你需要的空间也大啊。</p>
+<h4 id="差量备份"><a href="#差量备份" class="headerlink" title="差量备份"></a>差量备份</h4><p>只备份从<strong>上次完全备份</strong>以来发生<strong>变化</strong>的数据，是<strong>建立在完全备份的基础</strong>上。</p>
+<h4 id="增量全备份"><a href="#增量全备份" class="headerlink" title="增量全备份"></a>增量全备份</h4><p>只备份从<strong>上次备份</strong>以来文件中发生变化过的数据。不管你上次备份采用的是全备，差备还是增量备份。  </p>
 <h1 id="分级存储"><a href="#分级存储" class="headerlink" title="分级存储"></a>分级存储</h1><p>基于信息生命周期管理的思想，分级存储就是：</p>
 <ol>
 <li><p>第一级：一线磁盘阵列<br>指存储应用频繁访问数据的磁盘阵列；</p>
@@ -622,7 +622,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据保护"><span class="nav-number">1.</span> <span class="nav-text">数据保护</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件级备份"><span class="nav-number">1.0.1.</span> <span class="nav-text">文件级备份</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#块级备份"><span class="nav-number">1.0.2.</span> <span class="nav-text">块级备份</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高级数据保护"><span class="nav-number">2.</span> <span class="nav-text">高级数据保护</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#远程文件复制"><span class="nav-number">2.0.1.</span> <span class="nav-text">远程文件复制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程磁盘（卷）镜像"><span class="nav-number">2.0.2.</span> <span class="nav-text">远程磁盘（卷）镜像</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#快-块-照数据保护"><span class="nav-number">3.</span> <span class="nav-text">快(块)照数据保护</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于文件系统的快照"><span class="nav-number">3.0.1.</span> <span class="nav-text">基于文件系统的快照</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于物理卷的快照"><span class="nav-number">3.0.2.</span> <span class="nav-text">基于物理卷的快照</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#卷clone"><span class="nav-number">4.</span> <span class="nav-text">卷clone</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据备份系统的基本要件"><span class="nav-number">5.</span> <span class="nav-text">数据备份系统的基本要件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据备份"><span class="nav-number">6.</span> <span class="nav-text">数据备份</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#完全备份"><span class="nav-number">6.0.1.</span> <span class="nav-text">完全备份</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#差量备份"><span class="nav-number">6.0.2.</span> <span class="nav-text">差量备份</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增量全备份"><span class="nav-number">6.0.3.</span> <span class="nav-text">增量全备份</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分级存储"><span class="nav-number">7.</span> <span class="nav-text">分级存储</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据保护"><span class="nav-number">1.</span> <span class="nav-text">数据保护</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件级备份"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">文件级备份</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#块级备份"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">块级备份</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高级数据保护"><span class="nav-number">2.</span> <span class="nav-text">高级数据保护</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#远程文件复制"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">远程文件复制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#远程磁盘（卷）镜像"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">远程磁盘（卷）镜像</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#快-块-照数据保护"><span class="nav-number">3.</span> <span class="nav-text">快(块)照数据保护</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基于文件系统的快照"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">基于文件系统的快照</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于物理卷的快照"><span class="nav-number">3.0.0.2.</span> <span class="nav-text">基于物理卷的快照</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#卷clone"><span class="nav-number">4.</span> <span class="nav-text">卷clone</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据备份系统的基本要件"><span class="nav-number">5.</span> <span class="nav-text">数据备份系统的基本要件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据备份"><span class="nav-number">6.</span> <span class="nav-text">数据备份</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#完全备份"><span class="nav-number">6.0.0.1.</span> <span class="nav-text">完全备份</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#差量备份"><span class="nav-number">6.0.0.2.</span> <span class="nav-text">差量备份</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增量全备份"><span class="nav-number">6.0.0.3.</span> <span class="nav-text">增量全备份</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分级存储"><span class="nav-number">7.</span> <span class="nav-text">分级存储</span></a></li></ol></div>
             
 
           </div>
