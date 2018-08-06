@@ -284,6 +284,331 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/06/《大话存储》第十四章虚拟化的学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chengwei">
+      <meta itemprop="description" content="前端菜鸟">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zihebingwu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/06/《大话存储》第十四章虚拟化的学习/" itemprop="url">
+                  《大话存储》第十四章虚拟化的学习
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2018-08-06 15:11:44 / Updated at: 17:36:10" itemprop="dateCreated datePublished" datetime="2018-08-06T15:11:44+08:00">2018-08-06</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>虚拟化的好处: 下层复杂逻辑转变为上层的简单逻辑。</strong></p>
+<h1 id="操作系统对硬件的虚拟化"><a href="#操作系统对硬件的虚拟化" class="headerlink" title="操作系统对硬件的虚拟化"></a>操作系统对硬件的虚拟化</h1><ul>
+<li>操作系统本身就是一段程序</li>
+<li>操作系统是可以提供给其他应用程序方便编写并运行的程序，由程序来运行程序，而不是程序自己来运行，则是操作系统提供虚拟化的表现。</li>
+<li><p>操作系统的多任务模式：  </p>
+<p>操作系统利用中断服务程序，当时钟中断到来的时候，cpu根据中断向量表的内容，指向调度程序所在的内存地址入口，执行调度程序的代码，调度程序所做的就是将cpu的执行跳转到各个应用程序所在的内存地址入口，比方说让每个应用程序执行10ms，然后保存其状态，然后等下次轮到它的时候继续执行。因为间隔时间特别小，所以给人的错觉会认为这些程序在同时执行。   </p>
+</li>
+</ul>
+<h1 id="计算机存储子系统的虚拟化"><a href="#计算机存储子系统的虚拟化" class="headerlink" title="计算机存储子系统的虚拟化"></a>计算机存储子系统的虚拟化</h1><p>存储子系统的元素包括<strong>磁盘</strong>、<strong>磁盘控制器</strong>、<strong>存储网络</strong>、<strong>磁盘阵列</strong>、<strong>卷管理层</strong>、<strong>目录虚拟层</strong>、<strong>文件系统虚拟层</strong>。  </p>
+<h3 id="磁盘控制器"><a href="#磁盘控制器" class="headerlink" title="磁盘控制器"></a>磁盘控制器</h3><p>磁盘控制器的工作是根据<strong>驱动程序</strong>发来的磁盘读写信息，向磁盘发送SCSI指令和数据。它的虚拟化表现在磁盘控制器可以对其驱动程序隐藏其下挂的物理磁盘，虚拟出一个或多个虚拟磁盘。由控制器来完成虚拟磁盘和物理磁盘的映射和抽象虚拟。RAID就是典型代表。  </p>
+<h3 id="存储网络的虚拟化"><a href="#存储网络的虚拟化" class="headerlink" title="存储网络的虚拟化"></a>存储网络的虚拟化</h3><p><strong>在交换式SAN上</strong>，即任何节点都是通过交换设备来进行通信的，通过在交换节点上做些手脚，就可以达到虚拟化的效果。  </p>
+<p>case1：在交换机上嵌入<strong>SCSI协议感知模块</strong>(暂时还不太懂这是个什么东东)，SCSI发起设备向目标设备传输的数据，经过交换机，会主动复制对应的帧到另一个节点lun上，形成镜像。若一个节点故障，则会将数据重定向到镜像的LUN上。   </p>
+<p>case2：或者将某些节点的N个lun合并成一个池，然后动态的从这个池中再划分出虚拟LUN，向发起者报告。  </p>
+<h3 id="磁盘阵列的虚拟化"><a href="#磁盘阵列的虚拟化" class="headerlink" title="磁盘阵列的虚拟化"></a>磁盘阵列的虚拟化</h3><p>磁盘阵列本来就是一个小计算机系统(JBOD除外)，是对存储子系统的抽象虚拟化最佳表现。</p>
+<p>何为磁盘阵列，指的是将大量磁盘进行组织管理，抽象虚拟成逻辑磁盘。通过和主机适配器通信，呈现给主机。</p>
+<p><img src="https://i.imgur.com/lpaEs7c.png" alt="">  </p>
+<p>这个虚拟设备，面对后端存储，它充当主机，可以从后端掌管LUN，然后将这些LUN合并再按照需求灵活分割，从而呈交给前端的多台主机使用；而面对前端主机的时候，它就是存储。   </p>
+<h3 id="卷管理层"><a href="#卷管理层" class="headerlink" title="卷管理层"></a>卷管理层</h3><p>运行在<strong>应用主机</strong>上的功能模块（它是应用在主机上的），对<strong>底层的物理磁盘或者LUN</strong>搜集再分配。</p>
+<ul>
+<li>对盘阵控制器虚拟化之后的LUN再虚拟化，</li>
+<li>比如进行镜像处理，</li>
+<li>或者对其中的多个LUN做成软RAID 。</li>
+<li>再或者将所有的LUN合并形成资源池。</li>
+<li>然后掰成多个卷。  </li>
+<li>典型的卷管理软件有LVM等  </li>
+</ul>
+<h3 id="文件系统的虚拟化"><a href="#文件系统的虚拟化" class="headerlink" title="文件系统的虚拟化"></a>文件系统的虚拟化</h3><p>即通过<strong>元文件(描述文件分布和属性)</strong>找实际数据在磁盘上对应的<strong>位置</strong>。文件系统是对磁盘块的虚拟、抽象、组织和管理。  </p>
+<h3 id="目录虚拟层"><a href="#目录虚拟层" class="headerlink" title="目录虚拟层"></a>目录虚拟层</h3><p>操作系统(Windows\UNIX\linux)中都有一个虚拟目录结构，在linux中叫VFS(Virtual File System)。</p>
+<p>虚拟文件系统，也就是说文件系统的目录不是真实的，任何的文件系统可以挂在目录下。成为虚拟目录的子目录，可以增强灵活性。  </p>
+<h1 id="带内虚拟化和带外虚拟化"><a href="#带内虚拟化和带外虚拟化" class="headerlink" title="带内虚拟化和带外虚拟化"></a>带内虚拟化和带外虚拟化</h1><ol>
+<li>带内 InBand ：控制指令和数据包走同一路线，所谓控制指令指的是控制数据流向的数据，如IP路由协议产生的数据包，它也是利用实际数据线路进行传输。</li>
+<li>带外 OutBand：控制指令走单独的路线。  </li>
+</ol>
+<p>带外和带内虚拟化：</p>
+<ol>
+<li>带内虚拟化：进行虚拟化的设备直接横在发起者和目标路径之间，也就是串在同一路径上，作为一个“泵”  </li>
+<li>带外虚拟化：旁路，用这条路径来走控制信号，而实际数据还是由发起者直接走向目标。发起者必须先咨询旁路的虚拟化设备，经过提示之后，才根据虚拟化设备的指示直接向目标请求数据.</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/06/《大话存储》16章数据保护与备份技术学习总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chengwei">
+      <meta itemprop="description" content="前端菜鸟">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zihebingwu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/06/《大话存储》16章数据保护与备份技术学习总结/" itemprop="url">
+                  《大话存储》16章数据保护与备份技术学习总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2018-08-06 11:08:10 / Updated at: 17:33:36" itemprop="dateCreated datePublished" datetime="2018-08-06T11:08:10+08:00">2018-08-06</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>数据保护，就是对当前位置的数据进行备份，以防止突发情况的发生造成数据的丢失带来的损失。  </p>
+<h1 id="数据保护"><a href="#数据保护" class="headerlink" title="数据保护"></a>数据保护</h1><h3 id="文件级备份"><a href="#文件级备份" class="headerlink" title="文件级备份"></a>文件级备份</h3><p>文件级的备份是通过调用<strong>文件系统的接口</strong>将<strong>数据</strong>一<strong>文件</strong>的形式读出，然后将读出的文件存到另一个介质上，由于原来的介质上有文件系统管理数据，文件的存放可以不连续，而在新介质上很可能是<strong>连续的</strong>。   </p>
+<h3 id="块级备份"><a href="#块级备份" class="headerlink" title="块级备份"></a>块级备份</h3><p>这里的“块”，相对于磁盘来说就是<strong>扇区(Sector)</strong>，块级备份不考虑文件系统的逻辑，直接通过磁盘控制器驱动接口对磁盘扇区进行读取，并将读取到的扇区写入到新的磁盘对应的扇区。  所以<strong>速度快</strong> ，  </p>
+<p>缺点：其一、因为它不管你扇区上有没有数据，都会备份，所以就会备份很多僵尸扇区，我的理解就是无用功，浪费时间资源；其二 ，原来不连续的文件，备份之后还是不连续。</p>
+<p>典型应用就是<strong>磁盘镜像</strong>，而磁盘镜像最简单的实现方式就是RAID1，这里一定要理解<strong>“镜”</strong>这个字，假想你站在镜子前，肯定是你做什么动作，镜子里就会出现什么动作。RAID1将对一块磁盘的写入，完全复制到另一块磁盘，两块磁盘内容完全相同。 </p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/06/《大话存储》16章数据保护与备份技术学习总结/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/31/Hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -617,7 +942,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2018-07-30 16:55:46" itemprop="dateModified" datetime="2018-07-30T16:55:46+08:00">2018-07-30</time>
+                <time title="Updated at: 2018-08-03 17:54:47" itemprop="dateModified" datetime="2018-08-03T17:54:47+08:00">2018-08-03</time>
               
             
           </span>
@@ -652,15 +977,16 @@
       
         
           
-            <h1 id="先来说下LUN"><a href="#先来说下LUN" class="headerlink" title="先来说下LUN"></a>先来说下<strong>LUN</strong></h1><ol>
+            <h1 id="先来说下“LUN”"><a href="#先来说下“LUN”" class="headerlink" title="先来说下“LUN”"></a>先来说下<strong>“LUN”</strong></h1><ol>
 <li><strong>LUN的概念</strong><br>之前一见到这个单词就蒙圈，这是源于总想着它是啥，指的是什么。先来看下它的概念。<br><strong>LUN:</strong>全称是logical unit number,即逻辑单元号。由于SCSI总线上连接设备最多有15个，用Target ID来描述这些设备，一个号对应一个设备。然而，实际中需要描述的设备是远远超过这些数字的，于是就有了<strong>lun</strong>,每个target下都可以有多个lun device，我们通常简称lun device为lun，这样就可以说每个设备的描述就有原来的target x变成target x lun y了,那么显而易见的,我们描述设备的能力增强了。（可以理解成原来只有一级分支的树形图，现在又多了二级分支）。  </li>
 <li><strong>LUN masking</strong><br>为了保证并不是所有的磁盘资源都能够被主机所使用，就要采取管制措施，是的主机只能使用某一部分资源。 lun masking保证服务器只能访问给它分配的存储资源，没给它分配的资源，就不要想了。通过LUN映射表对特定的主机报告特定的LUN.</li>
 <li><strong>LUN mapping</strong><br>lun mapping是一样的道理，类似于绿色通道，保证服务器只能看到某部分资源。</li>
 <li><p><strong>LUN 的 multi-path</strong><br>现在，存储网络越来越发达了，一个lun有多条通路可以访问也不是新鲜事了。  </p>
 <p>服务器使用多个HBA连接到存储网络，存储网络又可能是由多个交换设备组成，而存储系统又可能有多个控制器和链路，lun到服务器的存储网络链路又可能存在着多条不同的逻辑链路。那么，必然的，同一个physical lun在服务器上必然被识别为多个设备。因为os区别设备无非用的是总线，target id，lun id来，只要号码不同，就认为是不同的设备。   </p>
-<p>由于上面的情况，多路径管理软件应运而生了，比如emc的powerpath，这个软件的作用就是让操作系统知道那些操作系统识别到lun实际上是一个真正的physical lun，具体的做法，就是生成一个特别的设备文件，操作系统操作这个特殊的设备文件。而我们知道，设备文件+driver+firmware的一个作用，就是告诉操作系统该怎么使用这个设备。那么就是说，多路径管理软件从driver和设备文件着手，告诉了操作系统怎么来处理这些身份复杂的lun。 </p>
+<p>由于上面的情况，多路径管理软件应运而生了，比如emc的powerpath，这个软件的作用就是让操作系统知道那些操作系统识别到lun实际上是一个真正的physical lun，具体的做法，就是生成一个特别的设备文件，操作系统操作这个特殊的设备文件。而我们知道，设备文件+driver+firmware的一个作用，就是告诉操作系统该怎么使用这个设备。那么就是说，多路径管理软件从driver和设备文件着手，告诉了操作系统怎么来处理这些身份复杂的lun。   </p>
 </li>
 </ol>
+<p>- </p>
 
           
         
@@ -881,7 +1207,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>

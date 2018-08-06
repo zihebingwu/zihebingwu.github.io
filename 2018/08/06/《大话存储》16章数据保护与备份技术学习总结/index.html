@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="数据保护，就是对当前位置的数据进行备份，以防止突发情况的发生造成数据的丢失带来的损失。   数据保护文件级备份文件级的备份是通过调用文件系统的接口将数据一文件的形式读出，然后将读出的文件存到另一个介质上，由于原来的介质上有文件系统管理数据，文件的存放可以不连续，而在新介质上很可能是连续的。    块级备份这里的“块”，相对于磁盘来说就是扇区(Sector)，块级备份不考虑文件系统的逻辑，直接通过磁">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《大话存储》16章数据保护与备份技术学习总结">
+<meta property="og:url" content="http://yoursite.com/2018/08/06/《大话存储》16章数据保护与备份技术学习总结/index.html">
+<meta property="og:site_name" content="zihebingwu&#39;s Blog">
+<meta property="og:description" content="数据保护，就是对当前位置的数据进行备份，以防止突发情况的发生造成数据的丢失带来的损失。   数据保护文件级备份文件级的备份是通过调用文件系统的接口将数据一文件的形式读出，然后将读出的文件存到另一个介质上，由于原来的介质上有文件系统管理数据，文件的存放可以不连续，而在新介质上很可能是连续的。    块级备份这里的“块”，相对于磁盘来说就是扇区(Sector)，块级备份不考虑文件系统的逻辑，直接通过磁">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-06T09:33:36.572Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《大话存储》16章数据保护与备份技术学习总结">
+<meta name="twitter:description" content="数据保护，就是对当前位置的数据进行备份，以防止突发情况的发生造成数据的丢失带来的损失。   数据保护文件级备份文件级的备份是通过调用文件系统的接口将数据一文件的形式读出，然后将读出的文件存到另一个介质上，由于原来的介质上有文件系统管理数据，文件的存放可以不连续，而在新介质上很可能是连续的。    块级备份这里的“块”，相对于磁盘来说就是扇区(Sector)，块级备份不考虑文件系统的逻辑，直接通过磁">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/06/《大话存储》16章数据保护与备份技术学习总结/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>《大话存储》16章数据保护与备份技术学习总结 | zihebingwu's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/zihebingwu" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#FD6C6C; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zihebingwu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">热爱生命，热爱生活</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Startseite</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Kategorien</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/06/《大话存储》16章数据保护与备份技术学习总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chengwei">
+      <meta itemprop="description" content="前端菜鸟">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zihebingwu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《大话存储》16章数据保护与备份技术学习总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2018-08-06 11:08:10 / Updated at: 17:33:36" itemprop="dateCreated datePublished" datetime="2018-08-06T11:08:10+08:00">2018-08-06</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>数据保护，就是对当前位置的数据进行备份，以防止突发情况的发生造成数据的丢失带来的损失。  </p>
+<h1 id="数据保护"><a href="#数据保护" class="headerlink" title="数据保护"></a>数据保护</h1><h3 id="文件级备份"><a href="#文件级备份" class="headerlink" title="文件级备份"></a>文件级备份</h3><p>文件级的备份是通过调用<strong>文件系统的接口</strong>将<strong>数据</strong>一<strong>文件</strong>的形式读出，然后将读出的文件存到另一个介质上，由于原来的介质上有文件系统管理数据，文件的存放可以不连续，而在新介质上很可能是<strong>连续的</strong>。   </p>
+<h3 id="块级备份"><a href="#块级备份" class="headerlink" title="块级备份"></a>块级备份</h3><p>这里的“块”，相对于磁盘来说就是<strong>扇区(Sector)</strong>，块级备份不考虑文件系统的逻辑，直接通过磁盘控制器驱动接口对磁盘扇区进行读取，并将读取到的扇区写入到新的磁盘对应的扇区。  所以<strong>速度快</strong> ，  </p>
+<p>缺点：其一、因为它不管你扇区上有没有数据，都会备份，所以就会备份很多僵尸扇区，我的理解就是无用功，浪费时间资源；其二 ，原来不连续的文件，备份之后还是不连续。</p>
+<p>典型应用就是<strong>磁盘镜像</strong>，而磁盘镜像最简单的实现方式就是RAID1，这里一定要理解<strong>“镜”</strong>这个字，假想你站在镜子前，肯定是你做什么动作，镜子里就会出现什么动作。RAID1将对一块磁盘的写入，完全复制到另一块磁盘，两块磁盘内容完全相同。 </p>
+<a id="more"></a>
+<h1 id="高级数据保护"><a href="#高级数据保护" class="headerlink" title="高级数据保护"></a>高级数据保护</h1><h3 id="远程文件复制"><a href="#远程文件复制" class="headerlink" title="远程文件复制"></a>远程文件复制</h3><p>即把需要备份的文件，通过网络传输到<strong>异地容灾站点</strong>。它可以只复制一个文件中变化过的内容，而不必整个文件都复制：<strong>增量复制</strong>  </p>
+<h3 id="远程磁盘（卷）镜像"><a href="#远程磁盘（卷）镜像" class="headerlink" title="远程磁盘（卷）镜像"></a>远程磁盘（卷）镜像</h3><p>基于块的远程备份，与远程文件复制不同的地方在于，是把块数据备份到异地站点。又可以分为同步和异步复制：  </p>
+<p>同步复制：即数据真的复制到异地站点以后，才会上报上层IO成功消息<br>异步复制：写入成功即可回复成功，然后通过网络传输到异地。当然你这个响应快，但不能保证一致性。   </p>
+<h1 id="快-块-照数据保护"><a href="#快-块-照数据保护" class="headerlink" title="快(块)照数据保护"></a>快(块)照数据保护</h1><p>无论远程镜像还是本地镜像，如果某个时刻相对镜像卷进行备份，此时要停掉主机所有的IO动作，即<strong>拆分镜像</strong>，这当然会影响应用。所以—<strong>快照</strong>就产生了。   </p>
+<h3 id="基于文件系统的快照"><a href="#基于文件系统的快照" class="headerlink" title="基于文件系统的快照"></a>基于文件系统的快照</h3><p>文件系统管理的精髓就在于它的链表、B树以及位图等结构。也就是元数据(Metadata) 。  </p>
+<ol>
+<li>文件系统将多个扇区组成一个<strong>簇</strong> 来降低管理规模，比如NTFS最大块可以为4KB，也就是8个扇区组成一簇(Block).  </li>
+<li>文件系统会创建所有簇的<strong>位图</strong>文件，每个位对应一个簇，用0、1表示簇是否被使用。被使用了就被置为1.  </li>
+<li>文件系统保存一份<strong>文件</strong>和其对应<strong>簇号</strong>的映射链。即告诉文件存在了哪些簇号上。  </li>
+</ol>
+<p>————是不是可以理解文件和簇号，簇和位图之间分别有个映射表。前者用来查文件存在哪些位置，后来来查某个簇是否被占用。  </p>
+<p><strong>写入新数据</strong></p>
+<ol>
+<li>查找簇位图，找位值为0的簇号</li>
+<li>计算所需空间， 分配簇号给文件</li>
+<li>将数据写入簇，再去文件——簇号映射图更新</li>
+<li>将对应的簇映射关系记录下来，到簇位图将对应位置改为1.</li>
+</ol>
+<p><strong>删除数据</strong></p>
+<ol>
+<li>直接在簇号映射链中抹掉</li>
+<li><p>簇位图对应簇改为0   </p>
+<p> <strong>看出元数据的重要性了吧！！！</strong></p>
+</li>
+</ol>
+<p><strong>快照技术</strong>就是为了解决这种问题，其基本思想是抓取某一时间点磁盘卷上的所有数据。  </p>
+<ol>
+<li><strong>Copy on First Write (CoFW)</strong><br>快照中的指针始终指向原数据，更改后的数据霸占了原来数据的位置(很霸道呢~)，把原来的数据挤出去了。<strong>一次读出，两次写操作</strong>。系统中将有两套元数据链，原来的元数据指向当前最新的，快照的元数据链指向历史。</li>
+<li><strong>Redirect on First Write,(RoFW)</strong><br>快照中的指针仍指向原数据，这个就比较友好了，给更改的数据另开辟一段新的空间来存放。<strong>一次读出，一次写操作</strong>。系统也有两套元数据，一套是快照保存下来的，永远不更新，一套是源文件系统的，不断的更新。只有<strong>首次覆盖的时候，才重定向</strong>，因为重定向以后的数据块，哪怕被覆盖了，也不影响之前快照保存的数据了。</li>
+</ol>
+<h3 id="基于物理卷的快照"><a href="#基于物理卷的快照" class="headerlink" title="基于物理卷的快照"></a>基于物理卷的快照</h3><p>基于物理卷的快照比文件系统快照要简单的多。因为LUN一般在底层磁盘上是固定的，不像文件系统一样可以随机细粒度的分布。所以可以认为<strong>LUN的原数据就是磁层磁盘的起始和结束地址</strong>。这个就简单了，你不用根据一个额外的文件去找相应的存储地址了，所以在做快照的时候，需要复制的元数据也少了。  </p>
+<p>卷扇区方都是用LBA来编号的，实现快照的时候，程序首先保留一张初始LBA表，每当有新的写入请求的时候，重定向到另一个地方，并在初始的LBA表中做好记录。比如</p>
+<pre><code>原始LBA：卷A的10000号，映射到LBA：卷B的100号。  
+</code></pre><p>此时如果来了新的写IO，有两种方式一种是Write Redirect 一种是Copy on Write</p>
+<p>所谓Write Redirect就是将文件系统的读写请求，重定向到卷B，这样每次IO其实都会查找快照映射表，降低了性能。所以引入了Copy on Write</p>
+<p>所谓Copy on write，就是当写请求来的时候，先把原来的扇区的数据复制一份到空闲卷，然后将新数据写入原卷。不过这种复制操作只发生在原卷某个或者快照之后从未更新过的块上面，若是某个块在快照之后更新过了，说明之前的数据已经转移走了，可以放心的覆盖。</p>
+<p>所以Copy on Write实际上是让旧数据先占着位置，等新数据来了以后先把原来的数据复制走，再更新，而且一旦更新了一次，可以直接覆盖。  </p>
+<h1 id="卷clone"><a href="#卷clone" class="headerlink" title="卷clone"></a>卷clone</h1><p>快照是某个时刻的影子，而克隆是某时刻的实体。这个也好理解，你没见过克隆动物是克隆出来一个影子吧，克隆出来的肯定是实实在在的东西。  </p>
+<p>一般快照都是只读的，不可改写。如果某个物理卷某时刻生成一份可写的快照，就叫做这个卷某时刻的一份Clone。 然而这份Clone内容没被修改的部分是与源卷共享的，只有被更改之后的数据才是实实在在地存在另一处，所以源卷没了，Clone也就没了，这叫虚拟Clone。如果把数据复制出来，生成一个独立的卷，则就叫Split Clone，也就是可以得到实Clone。 </p>
+<h1 id="数据备份系统的基本要件"><a href="#数据备份系统的基本要件" class="headerlink" title="数据备份系统的基本要件"></a>数据备份系统的基本要件</h1><ol>
+<li>备份对象：需要备份的备份源  </li>
+<li>备份目标：磁盘、磁带等介质</li>
+<li>备份通路：网络</li>
+<li>备份执行引擎：<strong>备份软件</strong></li>
+<li>备份策略</li>
+</ol>
+<h1 id="数据备份"><a href="#数据备份" class="headerlink" title="数据备份"></a>数据备份</h1><h3 id="完全备份"><a href="#完全备份" class="headerlink" title="完全备份"></a>完全备份</h3><p>从字面上就以理解，无论你要备份的数据有多大，我都给你完完全全备份下来，这个应该安全系数比较高，当然你也得考虑实际啊，你需要的空间也大啊。</p>
+<h3 id="差量备份"><a href="#差量备份" class="headerlink" title="差量备份"></a>差量备份</h3><p>只备份从<strong>上次完全备份</strong>以来发生<strong>变化</strong>的数据，是<strong>建立在完全备份的基础</strong>上。</p>
+<h3 id="增量全备份"><a href="#增量全备份" class="headerlink" title="增量全备份"></a>增量全备份</h3><p>只备份从<strong>上次备份</strong>以来文件中发生变化过的数据。不管你上次备份采用的是全备，差备还是增量备份。  </p>
+<h1 id="分级存储"><a href="#分级存储" class="headerlink" title="分级存储"></a>分级存储</h1><p>基于信息生命周期管理的思想，分级存储就是：</p>
+<ol>
+<li><p>第一级：一线磁盘阵列<br>指存储应用频繁访问数据的磁盘阵列；</p>
+</li>
+<li><p>第二级：二线虚拟磁带库(VTL,virtual tape library) </p>
+<p>专门存放那些近期不会被频繁访问的数据   </p>
+</li>
+<li>带库或者光盘库<br>几年甚至几十年都不访问的那种数据  </li>
+</ol>
+<p> 参考：  </p>
+<p><a href="https://www.jianshu.com/p/b14ece444676" target="_blank" rel="noopener">https://www.jianshu.com/p/b14ece444676</a></p>
+<p>《大话存储Ⅱ》</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/weixin.jpg" alt="Chengwei WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/31/Hello-world/" rel="next" title="Hello world">
+                <i class="fa fa-chevron-left"></i> Hello world
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/06/《大话存储》第十四章虚拟化的学习/" rel="prev" title="《大话存储》第十四章虚拟化的学习">
+                《大话存储》第十四章虚拟化的学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="Chengwei" />
+            
+              <p class="site-author-name" itemprop="name">Chengwei</p>
+              <p class="site-description motion-element" itemprop="description">前端菜鸟</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/zihebingwu" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zihebingwu@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据保护"><span class="nav-number">1.</span> <span class="nav-text">数据保护</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件级备份"><span class="nav-number">1.0.1.</span> <span class="nav-text">文件级备份</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#块级备份"><span class="nav-number">1.0.2.</span> <span class="nav-text">块级备份</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高级数据保护"><span class="nav-number">2.</span> <span class="nav-text">高级数据保护</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#远程文件复制"><span class="nav-number">2.0.1.</span> <span class="nav-text">远程文件复制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程磁盘（卷）镜像"><span class="nav-number">2.0.2.</span> <span class="nav-text">远程磁盘（卷）镜像</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#快-块-照数据保护"><span class="nav-number">3.</span> <span class="nav-text">快(块)照数据保护</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于文件系统的快照"><span class="nav-number">3.0.1.</span> <span class="nav-text">基于文件系统的快照</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于物理卷的快照"><span class="nav-number">3.0.2.</span> <span class="nav-text">基于物理卷的快照</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#卷clone"><span class="nav-number">4.</span> <span class="nav-text">卷clone</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据备份系统的基本要件"><span class="nav-number">5.</span> <span class="nav-text">数据备份系统的基本要件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据备份"><span class="nav-number">6.</span> <span class="nav-text">数据备份</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#完全备份"><span class="nav-number">6.0.1.</span> <span class="nav-text">完全备份</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#差量备份"><span class="nav-number">6.0.2.</span> <span class="nav-text">差量备份</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增量全备份"><span class="nav-number">6.0.3.</span> <span class="nav-text">增量全备份</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分级存储"><span class="nav-number">7.</span> <span class="nav-text">分级存储</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chengwei</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="true"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/js/src/love.js"></script>
+
+</body>
+</html>

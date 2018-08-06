@@ -108,24 +108,26 @@
 
 
 
-  <meta name="description" content="前端菜鸟">
+  <meta name="description" content="虚拟化的好处: 下层复杂逻辑转变为上层的简单逻辑。 操作系统对硬件的虚拟化 操作系统本身就是一段程序 操作系统是可以提供给其他应用程序方便编写并运行的程序，由程序来运行程序，而不是程序自己来运行，则是操作系统提供虚拟化的表现。 操作系统的多任务模式：   操作系统利用中断服务程序，当时钟中断到来的时候，cpu根据中断向量表的内容，指向调度程序所在的内存地址入口，执行调度程序的代码，调度程序所做的就">
 <meta property="og:type" content="article">
-<meta property="og:title" content="try">
-<meta property="og:url" content="http://yoursite.com/2018/07/25/try/index.html">
+<meta property="og:title" content="《大话存储》第十四章虚拟化的学习">
+<meta property="og:url" content="http://yoursite.com/2018/08/06/《大话存储》第十四章虚拟化的学习/index.html">
 <meta property="og:site_name" content="zihebingwu&#39;s Blog">
-<meta property="og:description" content="前端菜鸟">
+<meta property="og:description" content="虚拟化的好处: 下层复杂逻辑转变为上层的简单逻辑。 操作系统对硬件的虚拟化 操作系统本身就是一段程序 操作系统是可以提供给其他应用程序方便编写并运行的程序，由程序来运行程序，而不是程序自己来运行，则是操作系统提供虚拟化的表现。 操作系统的多任务模式：   操作系统利用中断服务程序，当时钟中断到来的时候，cpu根据中断向量表的内容，指向调度程序所在的内存地址入口，执行调度程序的代码，调度程序所做的就">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-25T08:15:51.159Z">
+<meta property="og:image" content="https://i.imgur.com/lpaEs7c.png">
+<meta property="og:updated_time" content="2018-08-06T09:36:10.073Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="try">
-<meta name="twitter:description" content="前端菜鸟">
+<meta name="twitter:title" content="《大话存储》第十四章虚拟化的学习">
+<meta name="twitter:description" content="虚拟化的好处: 下层复杂逻辑转变为上层的简单逻辑。 操作系统对硬件的虚拟化 操作系统本身就是一段程序 操作系统是可以提供给其他应用程序方便编写并运行的程序，由程序来运行程序，而不是程序自己来运行，则是操作系统提供虚拟化的表现。 操作系统的多任务模式：   操作系统利用中断服务程序，当时钟中断到来的时候，cpu根据中断向量表的内容，指向调度程序所在的内存地址入口，执行调度程序的代码，调度程序所做的就">
+<meta name="twitter:image" content="https://i.imgur.com/lpaEs7c.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/25/try/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/06/《大话存储》第十四章虚拟化的学习/"/>
 
 
 
@@ -135,7 +137,7 @@
   };
 </script>
 
-  <title>try | zihebingwu's Blog</title>
+  <title>《大话存储》第十四章虚拟化的学习 | zihebingwu's Blog</title>
   
 
 
@@ -284,7 +286,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/try/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/06/《大话存储》第十四章虚拟化的学习/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chengwei">
@@ -301,7 +303,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">try
+          <h1 class="post-title" itemprop="name headline">《大话存储》第十四章虚拟化的学习
               
             
           </h1>
@@ -326,9 +328,13 @@
                 
               
 
-              <time title="Post created: 2018-07-25 16:15:51" itemprop="dateCreated datePublished" datetime="2018-07-25T16:15:51+08:00">2018-07-25</time>
+              <time title="Post created: 2018-08-06 15:11:44 / Updated at: 17:36:10" itemprop="dateCreated datePublished" datetime="2018-08-06T15:11:44+08:00">2018-08-06</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -360,7 +366,45 @@
       
 
       
-        
+        <p><strong>虚拟化的好处: 下层复杂逻辑转变为上层的简单逻辑。</strong></p>
+<h1 id="操作系统对硬件的虚拟化"><a href="#操作系统对硬件的虚拟化" class="headerlink" title="操作系统对硬件的虚拟化"></a>操作系统对硬件的虚拟化</h1><ul>
+<li>操作系统本身就是一段程序</li>
+<li>操作系统是可以提供给其他应用程序方便编写并运行的程序，由程序来运行程序，而不是程序自己来运行，则是操作系统提供虚拟化的表现。</li>
+<li><p>操作系统的多任务模式：  </p>
+<p>操作系统利用中断服务程序，当时钟中断到来的时候，cpu根据中断向量表的内容，指向调度程序所在的内存地址入口，执行调度程序的代码，调度程序所做的就是将cpu的执行跳转到各个应用程序所在的内存地址入口，比方说让每个应用程序执行10ms，然后保存其状态，然后等下次轮到它的时候继续执行。因为间隔时间特别小，所以给人的错觉会认为这些程序在同时执行。   </p>
+</li>
+</ul>
+<h1 id="计算机存储子系统的虚拟化"><a href="#计算机存储子系统的虚拟化" class="headerlink" title="计算机存储子系统的虚拟化"></a>计算机存储子系统的虚拟化</h1><p>存储子系统的元素包括<strong>磁盘</strong>、<strong>磁盘控制器</strong>、<strong>存储网络</strong>、<strong>磁盘阵列</strong>、<strong>卷管理层</strong>、<strong>目录虚拟层</strong>、<strong>文件系统虚拟层</strong>。  </p>
+<h3 id="磁盘控制器"><a href="#磁盘控制器" class="headerlink" title="磁盘控制器"></a>磁盘控制器</h3><p>磁盘控制器的工作是根据<strong>驱动程序</strong>发来的磁盘读写信息，向磁盘发送SCSI指令和数据。它的虚拟化表现在磁盘控制器可以对其驱动程序隐藏其下挂的物理磁盘，虚拟出一个或多个虚拟磁盘。由控制器来完成虚拟磁盘和物理磁盘的映射和抽象虚拟。RAID就是典型代表。  </p>
+<h3 id="存储网络的虚拟化"><a href="#存储网络的虚拟化" class="headerlink" title="存储网络的虚拟化"></a>存储网络的虚拟化</h3><p><strong>在交换式SAN上</strong>，即任何节点都是通过交换设备来进行通信的，通过在交换节点上做些手脚，就可以达到虚拟化的效果。  </p>
+<p>case1：在交换机上嵌入<strong>SCSI协议感知模块</strong>(暂时还不太懂这是个什么东东)，SCSI发起设备向目标设备传输的数据，经过交换机，会主动复制对应的帧到另一个节点lun上，形成镜像。若一个节点故障，则会将数据重定向到镜像的LUN上。   </p>
+<p>case2：或者将某些节点的N个lun合并成一个池，然后动态的从这个池中再划分出虚拟LUN，向发起者报告。  </p>
+<h3 id="磁盘阵列的虚拟化"><a href="#磁盘阵列的虚拟化" class="headerlink" title="磁盘阵列的虚拟化"></a>磁盘阵列的虚拟化</h3><p>磁盘阵列本来就是一个小计算机系统(JBOD除外)，是对存储子系统的抽象虚拟化最佳表现。</p>
+<p>何为磁盘阵列，指的是将大量磁盘进行组织管理，抽象虚拟成逻辑磁盘。通过和主机适配器通信，呈现给主机。</p>
+<p><img src="https://i.imgur.com/lpaEs7c.png" alt="">  </p>
+<p>这个虚拟设备，面对后端存储，它充当主机，可以从后端掌管LUN，然后将这些LUN合并再按照需求灵活分割，从而呈交给前端的多台主机使用；而面对前端主机的时候，它就是存储。   </p>
+<h3 id="卷管理层"><a href="#卷管理层" class="headerlink" title="卷管理层"></a>卷管理层</h3><p>运行在<strong>应用主机</strong>上的功能模块（它是应用在主机上的），对<strong>底层的物理磁盘或者LUN</strong>搜集再分配。</p>
+<ul>
+<li>对盘阵控制器虚拟化之后的LUN再虚拟化，</li>
+<li>比如进行镜像处理，</li>
+<li>或者对其中的多个LUN做成软RAID 。</li>
+<li>再或者将所有的LUN合并形成资源池。</li>
+<li>然后掰成多个卷。  </li>
+<li>典型的卷管理软件有LVM等  </li>
+</ul>
+<h3 id="文件系统的虚拟化"><a href="#文件系统的虚拟化" class="headerlink" title="文件系统的虚拟化"></a>文件系统的虚拟化</h3><p>即通过<strong>元文件(描述文件分布和属性)</strong>找实际数据在磁盘上对应的<strong>位置</strong>。文件系统是对磁盘块的虚拟、抽象、组织和管理。  </p>
+<h3 id="目录虚拟层"><a href="#目录虚拟层" class="headerlink" title="目录虚拟层"></a>目录虚拟层</h3><p>操作系统(Windows\UNIX\linux)中都有一个虚拟目录结构，在linux中叫VFS(Virtual File System)。</p>
+<p>虚拟文件系统，也就是说文件系统的目录不是真实的，任何的文件系统可以挂在目录下。成为虚拟目录的子目录，可以增强灵活性。  </p>
+<h1 id="带内虚拟化和带外虚拟化"><a href="#带内虚拟化和带外虚拟化" class="headerlink" title="带内虚拟化和带外虚拟化"></a>带内虚拟化和带外虚拟化</h1><ol>
+<li>带内 InBand ：控制指令和数据包走同一路线，所谓控制指令指的是控制数据流向的数据，如IP路由协议产生的数据包，它也是利用实际数据线路进行传输。</li>
+<li>带外 OutBand：控制指令走单独的路线。  </li>
+</ol>
+<p>带外和带内虚拟化：</p>
+<ol>
+<li>带内虚拟化：进行虚拟化的设备直接横在发起者和目标路径之间，也就是串在同一路径上，作为一个“泵”  </li>
+<li>带外虚拟化：旁路，用这条路径来走控制信号，而实际数据还是由发起者直接走向目标。发起者必须先咨询旁路的虚拟化设备，经过提示之后，才根据虚拟化设备的指示直接向目标请求数据.</li>
+</ol>
+
       
     </div>
 
@@ -411,15 +455,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/08/06/《大话存储》16章数据保护与备份技术学习总结/" rel="next" title="《大话存储》16章数据保护与备份技术学习总结">
+                <i class="fa fa-chevron-left"></i> 《大话存储》16章数据保护与备份技术学习总结
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/26/开始更新博客/" rel="prev" title="开始更新博客">
-                开始更新博客 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -464,8 +508,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -528,6 +581,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统对硬件的虚拟化"><span class="nav-number">1.</span> <span class="nav-text">操作系统对硬件的虚拟化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机存储子系统的虚拟化"><span class="nav-number">2.</span> <span class="nav-text">计算机存储子系统的虚拟化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘控制器"><span class="nav-number">2.0.1.</span> <span class="nav-text">磁盘控制器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储网络的虚拟化"><span class="nav-number">2.0.2.</span> <span class="nav-text">存储网络的虚拟化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘阵列的虚拟化"><span class="nav-number">2.0.3.</span> <span class="nav-text">磁盘阵列的虚拟化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卷管理层"><span class="nav-number">2.0.4.</span> <span class="nav-text">卷管理层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件系统的虚拟化"><span class="nav-number">2.0.5.</span> <span class="nav-text">文件系统的虚拟化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录虚拟层"><span class="nav-number">2.0.6.</span> <span class="nav-text">目录虚拟层</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#带内虚拟化和带外虚拟化"><span class="nav-number">3.</span> <span class="nav-text">带内虚拟化和带外虚拟化</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
