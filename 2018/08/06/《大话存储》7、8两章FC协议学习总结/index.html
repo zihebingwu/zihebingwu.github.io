@@ -108,24 +108,24 @@
 
 
 
-  <meta name="description" content="前端菜鸟">
+  <meta name="description" content="FC产生背景SAN(Storage Area Network)存储区域网络:由于磁盘放到了主机外部，主机与存储设备之间需要通信，就形成了存储区域网络。这个网络专门用来给主机连接存储设备用的。    由于SCSI总线有16个节点的限制，不可能接入很多的磁盘，因此想要扩大SAN的规模，就得找到一种可寻址容量大，稳定性强、速度快、传输距离远的网络结构，由此FC网络就诞生了。   使用OSI模型对FC协议">
 <meta property="og:type" content="article">
-<meta property="og:title" content="try">
-<meta property="og:url" content="http://yoursite.com/2018/07/25/try/index.html">
+<meta property="og:title" content="《大话存储》7、8两章FC协议学习总结">
+<meta property="og:url" content="http://yoursite.com/2018/08/06/《大话存储》7、8两章FC协议学习总结/index.html">
 <meta property="og:site_name" content="zihebingwu&#39;s Blog">
-<meta property="og:description" content="前端菜鸟">
+<meta property="og:description" content="FC产生背景SAN(Storage Area Network)存储区域网络:由于磁盘放到了主机外部，主机与存储设备之间需要通信，就形成了存储区域网络。这个网络专门用来给主机连接存储设备用的。    由于SCSI总线有16个节点的限制，不可能接入很多的磁盘，因此想要扩大SAN的规模，就得找到一种可寻址容量大，稳定性强、速度快、传输距离远的网络结构，由此FC网络就诞生了。   使用OSI模型对FC协议">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-25T08:15:51.159Z">
+<meta property="og:updated_time" content="2018-08-06T13:02:06.051Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="try">
-<meta name="twitter:description" content="前端菜鸟">
+<meta name="twitter:title" content="《大话存储》7、8两章FC协议学习总结">
+<meta name="twitter:description" content="FC产生背景SAN(Storage Area Network)存储区域网络:由于磁盘放到了主机外部，主机与存储设备之间需要通信，就形成了存储区域网络。这个网络专门用来给主机连接存储设备用的。    由于SCSI总线有16个节点的限制，不可能接入很多的磁盘，因此想要扩大SAN的规模，就得找到一种可寻址容量大，稳定性强、速度快、传输距离远的网络结构，由此FC网络就诞生了。   使用OSI模型对FC协议">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/25/try/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/06/《大话存储》7、8两章FC协议学习总结/"/>
 
 
 
@@ -135,7 +135,7 @@
   };
 </script>
 
-  <title>try | zihebingwu's Blog</title>
+  <title>《大话存储》7、8两章FC协议学习总结 | zihebingwu's Blog</title>
   
 
 
@@ -225,7 +225,7 @@
           
           <li class="menu-item menu-item-home">
     <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Startseite</a>
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
   </li>
         
         
@@ -233,7 +233,7 @@
           
           <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Kategorien</a>
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
   </li>
 
       
@@ -284,7 +284,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/try/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/06/《大话存储》7、8两章FC协议学习总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chengwei">
@@ -301,7 +301,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">try
+          <h1 class="post-title" itemprop="name headline">《大话存储》7、8两章FC协议学习总结
               
             
           </h1>
@@ -319,16 +319,20 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2018-07-25 16:15:51" itemprop="dateCreated datePublished" datetime="2018-07-25T16:15:51+08:00">2018-07-25</time>
+              <time title="Created: 2018-08-06 20:31:12 / Modified: 21:02:06" itemprop="dateCreated datePublished" datetime="2018-08-06T20:31:12+08:00">2018-08-06</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -360,7 +364,28 @@
       
 
       
-        
+        <h1 id="FC产生背景"><a href="#FC产生背景" class="headerlink" title="FC产生背景"></a>FC产生背景</h1><p>SAN(Storage Area Network)存储区域网络:由于磁盘放到了主机外部，主机与存储设备之间需要通信，就形成了存储区域网络。这个网络专门用来给主机连接存储设备用的。   </p>
+<p>由于SCSI总线有16个节点的限制，不可能接入很多的磁盘，因此想要扩大SAN的规模，就得找到一种可寻址容量大，稳定性强、速度快、传输距离远的网络结构，由此FC网络就诞生了。  </p>
+<p>使用OSI模型对FC协议进行断层分析。  </p>
+<p><strong>物理层</strong><br>速度较高：1Gb/s,2Gb/s,4Gb/s,8Gb/s到16Gb/s<br>为了实现远距离传输，传输介质起码是<strong>光纤</strong>  </p>
+<p><strong>链路层</strong><br>FC协议的帧头有24节，但这24字节的帧头包含了寻址功能，还包含了传输功能保障。而以太网的开销为：  </p>
+<pre><code>14字节(以太网帧头)+20字节(IP头)+20字节(TCP头)=54字节  
+</code></pre><p>所以相比之下，FC协议的24字节开销相比TCP/IP是小的</p>
+<p><strong>网络层</strong><br>FC网络中的节点通信，遵循<strong>连</strong>、<strong>找</strong>、<strong>发</strong>三大要素。  </p>
+<ol>
+<li>连：通过FC交换机打通通路，主要的拓扑结构有FC-AL和Fabric两种。</li>
+<li>找：FC协议有一套不同于以太网的编码方式，每个设备自身有一个WWNN,是网络中设备自身的名字，设备上的每个端口有个WWPN。WWPN被映射到Fabric ID(24b),类似于MAC地址和IP地址映射一样，又可以分为：Domain ID,Area ID,Port ID三个亚寻址单元。</li>
+<li>发：指的就是与目标进行通信了。</li>
+</ol>
+<p><strong>传输层</strong></p>
+<p>与TCP作用一样：  </p>
+<ol>
+<li>对上层数据流进行Segment</li>
+<li>区分上层程序。TCP是通过端口号，而FC协议是通过Exchange ID来区分  </li>
+</ol>
+<p><strong>FC的优势</strong><br>1、提高了扩展性(这个满足了最初扩大SAN规模的目的)。  </p>
+<p>2、增加了传输距离：使得主机可以和几百米甚至上千米外的盘阵相连并读写数据。<br>3、解决了安全性问题。LUN Masking和ZONE都是为了提高FC网络的安全性。</p>
+
       
     </div>
 
@@ -411,14 +436,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/08/06/《大话存储》第十四章虚拟化的学习/" rel="next" title="《大话存储》第十四章虚拟化的学习">
+                <i class="fa fa-chevron-left"></i> 《大话存储》第十四章虚拟化的学习
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/26/开始更新博客/" rel="prev" title="开始更新博客">
-                开始更新博客 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/08/07/关于host文件/" rel="prev" title="关于host文件">
+                关于host文件 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -464,8 +493,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -484,8 +522,8 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">6</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
@@ -529,6 +567,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#FC产生背景"><span class="nav-number">1.</span> <span class="nav-text">FC产生背景</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -556,7 +610,7 @@
 
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
 
 
 

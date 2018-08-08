@@ -225,7 +225,7 @@
           
           <li class="menu-item menu-item-home menu-item-active">
     <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Startseite</a>
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
   </li>
         
         
@@ -233,7 +233,7 @@
           
           <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Kategorien</a>
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
   </li>
 
       
@@ -268,6 +268,627 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/08/angularJs学习之指令Directives/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chengwei">
+      <meta itemprop="description" content="前端菜鸟">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zihebingwu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/08/angularJs学习之指令Directives/" itemprop="url">
+                  angularJs学习之指令Directives
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-08-08 14:10:24" itemprop="dateCreated datePublished" datetime="2018-08-08T14:10:24+08:00">2018-08-08</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/07/Git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chengwei">
+      <meta itemprop="description" content="前端菜鸟">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zihebingwu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/07/Git/" itemprop="url">
+                  Git
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-08-07 14:52:22 / Modified: 16:25:45" itemprop="dateCreated datePublished" datetime="2018-08-07T14:52:22+08:00">2018-08-07</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>学些Git命令：     </p>
+<p>自己现在本地电脑找个合适的地方创建一个仓库，即一个空目录,比方说我在d盘创建一个名为gittest的空目录：  </p>
+<pre><code>$ cd d:
+$ mkdir gittest
+$ cd gittest
+$ pwd   
+</code></pre><p>pwd命令显示当前目录，第二步：  </p>
+<pre><code>$ git init  
+</code></pre><p>通过这个命令把gittest这个目录变成Git可以管理的仓库。在gittest目录下编写一个readme.txt文件  </p>
+<pre><code>$ git add readme.txt  
+$ git commit -m &quot;wrote a readme file&quot;  
+</code></pre><p><strong>-m</strong> 后面输入的是本次提交的说明，最好加入的说明能让你知道文件改动的地方。</p>
+<p><img src="https://i.imgur.com/7o7QqbL.png" alt="">    </p>
+<p>理解这个图很重要！！！！！   </p>
+<p>$ git add  :只是把文件放到了暂存区，git commit才把文件放到了分支？？  </p>
+<pre><code>git diff   #是工作区(work dict)和暂存区(stage)的比较
+
+git diff --cached    #是暂存区(stage)和分支(master)的比较   
+</code></pre><p><strong>git status</strong>   </p>
+<p>查看当前仓库的状态，通过这个命令可以观察文件是否被修改过，再通过git diff查看修改的内容。 </p>
+<p><strong>git clone</strong>   </p>
+<p>即将远程仓库的内容克隆到本地，这里要注意的是如果你想把克隆下来的内容克隆下来放到d盘，那就先  </p>
+<pre><code>$ cd d:  
+</code></pre><p>先切换到这个目录下，然后再执行  </p>
+<pre><code>git clone git@github.com:michaelliao/gitskills.git  
+</code></pre><p><strong>git log</strong>  </p>
+<p>这个命令显示从最近到最远的提交日志   </p>
+<p>HEAD 指向的是当前的版本，$ git reset –hard HEAD^，把它作为一个指针，可以往回退。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/07/关于host文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chengwei">
+      <meta itemprop="description" content="前端菜鸟">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zihebingwu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/07/关于host文件/" itemprop="url">
+                  关于host文件
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-08-07 13:07:06 / Modified: 13:19:35" itemprop="dateCreated datePublished" datetime="2018-08-07T13:07:06+08:00">2018-08-07</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>感觉自己不是一名真正的程序员，连host文件都不知道干什么的。(羞愧~~)  </p>
+<p><strong>host文件的位置</strong>：C:\Windows\System32\Drivers\Etc目录中。 它是个纯文本文件，用记事本可以打开：   </p>
+<p>host文件开头用#号对这个文件加以说明：   </p>
+<ol>
+<li>这个文件是根据TCP/IPforWindows的标准来工作的</li>
+<li>它的作用是包含IP地址和Host name(主机名)的映射关系</li>
+<li>是一个映射IP地址和Hostname(主机名)的规定，规定要求每段只能包括一个映射关系</li>
+<li>IP地址要放在每段的最前面，空格后再写上映射的Host name(主机名)。</li>
+<li>对于这段的映射说明用“#”分割后用文字说明。  </li>
+</ol>
+<p><strong>Hosts文件在Windows中是怎么工作的呢? </strong> </p>
+<p>当我们在地址栏中输入一个域名后(<a href="http://www.baidu.com)时，DNS服务器会把这个域名解析成XXX.XXX.XXX.XXX的IP地址，我们的计算机才能访问，但如果每个请求都要等待DNS服务器把域名解析后返回IP信息，这样访问效率会很低，而Hosts文件就能提高解析效率。" target="_blank" rel="noopener">www.baidu.com)时，DNS服务器会把这个域名解析成XXX.XXX.XXX.XXX的IP地址，我们的计算机才能访问，但如果每个请求都要等待DNS服务器把域名解析后返回IP信息，这样访问效率会很低，而Hosts文件就能提高解析效率。</a></p>
+<p>根据WindowS系统规定，在进行DNS请求之前，Windows系统会先检查自己的Hosts文件中是否有这个地址的映射关系，如果有就调用这个IP地址映射，没有的话才向DNS服务器提出域名解析。  </p>
+<p><strong>Hosts文件的作用：</strong></p>
+<ol>
+<li><strong>加快域名解析</strong> 对于要经常访问的网站，我们可以通过在Hosts中配置域名和IP的映射关系，这样当我们输入域名计算机就能很快解析出IP，而不用请求网络上的DNS服务器。  </li>
+<li><strong>方便局域网用户</strong> 在很多单位的局域网中，会有服务器提供给用户使用。但由于局域网中一般很少架设DNS服务器，访问这些服务要输入难记的IP地址，对不少人来说相当麻烦。现在可以分别给这些服务器取个容易记住的名字，然后在Hosts中建立IP映射，这样以后访问的时候我们输入这个服务器的名字就行了 </li>
+<li><strong>屏蔽网站</strong> 现在有很多网站不经过用户同意就将各种各样的插件安装到你的计算机中，有些说不定就是木马或病毒。对于这些网站我们可以利用Hosts把该网站的域名映射到错误的IP或自己计算机的IP，这样就不用访问了。 我们在Hosts写上以下内容： 127.0.0.1#屏蔽的网站 0.0.0.0#屏蔽的网站 这样计算机解析域名就解析到本机或错误的IP，达到了屏蔽的目的。 </li>
+<li><strong>顺利连接系统</strong> 对于Lotus的服务器和一些数据库服务器，在访问时如果直接输入IP地址那是不能访问的，只能输入服务器名才能访问。那么我们配置好Hosts文件，这样输入服务器名就能顺利连接了。 最后要指出的是，Hosts文件配置的映射是静态的，如果网络上的计算机更改了请及时更新IP地址，否则将不能访问。</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/06/《大话存储》7、8两章FC协议学习总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chengwei">
+      <meta itemprop="description" content="前端菜鸟">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zihebingwu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/06/《大话存储》7、8两章FC协议学习总结/" itemprop="url">
+                  《大话存储》7、8两章FC协议学习总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-08-06 20:31:12 / Modified: 21:02:06" itemprop="dateCreated datePublished" datetime="2018-08-06T20:31:12+08:00">2018-08-06</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="FC产生背景"><a href="#FC产生背景" class="headerlink" title="FC产生背景"></a>FC产生背景</h1><p>SAN(Storage Area Network)存储区域网络:由于磁盘放到了主机外部，主机与存储设备之间需要通信，就形成了存储区域网络。这个网络专门用来给主机连接存储设备用的。   </p>
+<p>由于SCSI总线有16个节点的限制，不可能接入很多的磁盘，因此想要扩大SAN的规模，就得找到一种可寻址容量大，稳定性强、速度快、传输距离远的网络结构，由此FC网络就诞生了。  </p>
+<p>使用OSI模型对FC协议进行断层分析。  </p>
+<p><strong>物理层</strong><br>速度较高：1Gb/s,2Gb/s,4Gb/s,8Gb/s到16Gb/s<br>为了实现远距离传输，传输介质起码是<strong>光纤</strong>  </p>
+<p><strong>链路层</strong><br>FC协议的帧头有24节，但这24字节的帧头包含了寻址功能，还包含了传输功能保障。而以太网的开销为：  </p>
+<pre><code>14字节(以太网帧头)+20字节(IP头)+20字节(TCP头)=54字节  
+</code></pre><p>所以相比之下，FC协议的24字节开销相比TCP/IP是小的</p>
+<p><strong>网络层</strong><br>FC网络中的节点通信，遵循<strong>连</strong>、<strong>找</strong>、<strong>发</strong>三大要素。  </p>
+<ol>
+<li>连：通过FC交换机打通通路，主要的拓扑结构有FC-AL和Fabric两种。</li>
+<li>找：FC协议有一套不同于以太网的编码方式，每个设备自身有一个WWNN,是网络中设备自身的名字，设备上的每个端口有个WWPN。WWPN被映射到Fabric ID(24b),类似于MAC地址和IP地址映射一样，又可以分为：Domain ID,Area ID,Port ID三个亚寻址单元。</li>
+<li>发：指的就是与目标进行通信了。</li>
+</ol>
+<p><strong>传输层</strong></p>
+<p>与TCP作用一样：  </p>
+<ol>
+<li>对上层数据流进行Segment</li>
+<li>区分上层程序。TCP是通过端口号，而FC协议是通过Exchange ID来区分  </li>
+</ol>
+<p><strong>FC的优势</strong><br>1、提高了扩展性(这个满足了最初扩大SAN规模的目的)。  </p>
+<p>2、增加了传输距离：使得主机可以和几百米甚至上千米外的盘阵相连并读写数据。<br>3、解决了安全性问题。LUN Masking和ZONE都是为了提高FC网络的安全性。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -323,14 +944,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2018-08-06 15:11:44 / Updated at: 17:51:13" itemprop="dateCreated datePublished" datetime="2018-08-06T15:11:44+08:00">2018-08-06</time>
+              <time title="Created: 2018-08-06 15:11:44 / Modified: 17:51:13" itemprop="dateCreated datePublished" datetime="2018-08-06T15:11:44+08:00">2018-08-06</time>
             
 
             
@@ -389,7 +1010,7 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/06/《大话存储》第十四章虚拟化的学习/#more" rel="contents">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -483,14 +1104,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2018-08-06 11:08:10 / Updated at: 17:52:27" itemprop="dateCreated datePublished" datetime="2018-08-06T11:08:10+08:00">2018-08-06</time>
+              <time title="Created: 2018-08-06 11:08:10 / Modified: 17:52:27" itemprop="dateCreated datePublished" datetime="2018-08-06T11:08:10+08:00">2018-08-06</time>
             
 
             
@@ -537,7 +1158,7 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/06/《大话存储》16章数据保护与备份技术学习总结/#more" rel="contents">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -631,149 +1252,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2018-07-31 16:56:29" itemprop="dateCreated datePublished" datetime="2018-07-31T16:56:29+08:00">2018-07-31</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/26/出错/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chengwei">
-      <meta itemprop="description" content="前端菜鸟">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zihebingwu's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/26/出错/" itemprop="url">
-                  出错
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2018-07-26 15:22:27" itemprop="dateCreated datePublished" datetime="2018-07-26T15:22:27+08:00">2018-07-26</time>
+              <time title="Created: 2018-07-31 16:56:29" itemprop="dateCreated datePublished" datetime="2018-07-31T16:56:29+08:00">2018-07-31</time>
             
 
             
@@ -901,14 +1387,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2018-07-26 15:07:46" itemprop="dateCreated datePublished" datetime="2018-07-26T15:07:46+08:00">2018-07-26</time>
+              <time title="Created: 2018-07-26 15:07:46" itemprop="dateCreated datePublished" datetime="2018-07-26T15:07:46+08:00">2018-07-26</time>
             
 
             
@@ -925,7 +1411,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2018-08-03 17:54:47" itemprop="dateModified" datetime="2018-08-03T17:54:47+08:00">2018-08-03</time>
+                <time title="Modified: 2018-08-03 17:54:47" itemprop="dateModified" datetime="2018-08-03T17:54:47+08:00">2018-08-03</time>
               
             
           </span>
@@ -971,141 +1457,6 @@
 </ol>
 <p>- </p>
 
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/try/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chengwei">
-      <meta itemprop="description" content="前端菜鸟">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zihebingwu's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/25/try/" itemprop="url">
-                  try
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2018-07-25 16:15:51" itemprop="dateCreated datePublished" datetime="2018-07-25T16:15:51+08:00">2018-07-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
           
         
       
@@ -1190,8 +1541,8 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">6</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
@@ -1262,7 +1613,7 @@
 
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
 
 
 
